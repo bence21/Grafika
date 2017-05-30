@@ -1,5 +1,5 @@
 #include "GLWidget.h"
-
+//valtozas
 #include <iostream>
 using namespace std;
 using namespace cagd;
