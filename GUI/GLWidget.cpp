@@ -278,6 +278,7 @@ namespace cagd
 		showParametricCurves=false;
 		showParametricSurface=false;
 		showModel=false;
+		showPatch=true;
 		initCyclicCurves();
 
 		initModel();
@@ -383,78 +384,78 @@ namespace cagd
 		// stores/duplicates the original model view matrix
 		glPushMatrix();
 
-			// applying transformations
-			glRotatef(_angle_x, 1.0, 0.0, 0.0);
-			glRotatef(_angle_y, 0.0, 1.0, 0.0);
-			glRotatef(_angle_z, 0.0, 0.0, 1.0);
-			glTranslated(_trans_x, _trans_y, _trans_z);
-			glScaled(_zoom, _zoom, _zoom);
+		// applying transformations
+		glRotatef(_angle_x, 1.0, 0.0, 0.0);
+		glRotatef(_angle_y, 0.0, 1.0, 0.0);
+		glRotatef(_angle_z, 0.0, 0.0, 1.0);
+		glTranslated(_trans_x, _trans_y, _trans_z);
+		glScaled(_zoom, _zoom, _zoom);
 
-			// render your geometry (this is oldest OpenGL rendering technique, later we will use some advanced methods)
+		// render your geometry (this is oldest OpenGL rendering technique, later we will use some advanced methods)
 
-			//			glColor3f(1.0f, 1.0f, 1.0f);
-			//			glBegin(GL_LINES);
-			//			glVertex3f(0.0f, 0.0f, 0.0f);
-			//			glVertex3f(1.1f, 0.0f, 0.0f);
+		//			glColor3f(1.0f, 1.0f, 1.0f);
+		//			glBegin(GL_LINES);
+		//			glVertex3f(0.0f, 0.0f, 0.0f);
+		//			glVertex3f(1.1f, 0.0f, 0.0f);
 
-			//			glVertex3f(0.0f, 0.0f, 0.0f);
-			//			glVertex3f(0.0f, 1.1f, 0.0f);
+		//			glVertex3f(0.0f, 0.0f, 0.0f);
+		//			glVertex3f(0.0f, 1.1f, 0.0f);
 
-			//			glVertex3f(0.0f, 0.0f, 0.0f);
-			//			glVertex3f(0.0f, 0.0f, 1.1f);
-			//			glEnd();
+		//			glVertex3f(0.0f, 0.0f, 0.0f);
+		//			glVertex3f(0.0f, 0.0f, 1.1f);
+		//			glEnd();
 
-			//			glBegin(GL_TRIANGLES);
-			//			// attributes
-			//			glColor3f(1.0f, 0.0f, 0.0f);
-			//			// associated with position
-			//			glVertex3f(1.0f, 0.0f, 0.0f);
+		//			glBegin(GL_TRIANGLES);
+		//			// attributes
+		//			glColor3f(1.0f, 0.0f, 0.0f);
+		//			// associated with position
+		//			glVertex3f(1.0f, 0.0f, 0.0f);
 
-			//			// attributes
-			//			glColor3f(0.0, 1.0, 0.0);
-			//			// associated with position
-			//			glVertex3f(0.0, 1.0, 0.0);
+		//			// attributes
+		//			glColor3f(0.0, 1.0, 0.0);
+		//			// associated with position
+		//			glVertex3f(0.0, 1.0, 0.0);
 
-			//			// attributes
-			//			glColor3f(0.0f, 0.0f, 1.0f);
-			//			// associated with position
-			//			glVertex3f(0.0f, 0.0f, 1.0f);
-			//			glEnd();
+		//			// attributes
+		//			glColor3f(0.0f, 0.0f, 1.0f);
+		//			// associated with position
+		//			glVertex3f(0.0f, 0.0f, 1.0f);
+		//			glEnd();
 
-			// pops the current matrix stack, replacing the current matrix with the one below it on the stack,
-			// i.e., the original model view matrix is restored
-			//			glPopMatrix();
+		// pops the current matrix stack, replacing the current matrix with the one below it on the stack,
+		// i.e., the original model view matrix is restored
+		//			glPopMatrix();
 
-			//		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-			//		glPushMatrix();
-			if(showParametricCurves) {
-				if(_image_of_pc[_pc_index]) {
-					glColor3f(1.0,0.0,0.0);
-					_image_of_pc[_pc_index]->RenderDerivatives(0,GL_LINE_STRIP);
+		//		glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+		//		glPushMatrix();
+		if(showParametricCurves) {
+			if(_image_of_pc[_pc_index]) {
+				glColor3f(1.0,0.0,0.0);
+				_image_of_pc[_pc_index]->RenderDerivatives(0,GL_LINE_STRIP);
 
-					glPointSize(5.0);
-					glColor3f(0.0,0.5,0.0);
-					_image_of_pc[_pc_index]->RenderDerivatives(1,GL_LINES);
-					_image_of_pc[_pc_index]->RenderDerivatives(1,GL_POINTS);
-					glColor3f(0.1f,0.5f,0.9f);
-					_image_of_pc[_pc_index]->RenderDerivatives(2,GL_LINES);
-					_image_of_pc[_pc_index]->RenderDerivatives(2,GL_POINTS);
-					glPointSize(1.0);
-				}
+				glPointSize(5.0);
+				glColor3f(0.0,0.5,0.0);
+				_image_of_pc[_pc_index]->RenderDerivatives(1,GL_LINES);
+				_image_of_pc[_pc_index]->RenderDerivatives(1,GL_POINTS);
+				glColor3f(0.1f,0.5f,0.9f);
+				_image_of_pc[_pc_index]->RenderDerivatives(2,GL_LINES);
+				_image_of_pc[_pc_index]->RenderDerivatives(2,GL_POINTS);
+				glPointSize(1.0);
 			}
-			if(showCyclicCurves) {
-				cyclicCurvesRender();
-			}
-			if(showParametricSurface) {
-				parametricSurfaceRender();
-			}
-			if(showModel) {
-				modelRender();
-			}
-
-				glEnable(GL_LIGHTING);
-				glEnable(GL_NORMALIZE);
-				glEnable(GL_LIGHT0);
+		}
+		if(showCyclicCurves) {
+			cyclicCurvesRender();
+		}
+		if(showParametricSurface) {
+			parametricSurfaceRender();
+		}
+		if(showModel) {
+			modelRender();
+		}
+		if(showPatch) {
+			glEnable(GL_LIGHTING);
+			glEnable(GL_NORMALIZE);
+			glEnable(GL_LIGHT0);
 
 			if(_before_interpolation) {
 				if (!_patch.RenderData())
@@ -462,23 +463,23 @@ namespace cagd
 					cout << "Could not render control net!" << endl;
 				}
 				MatFBRuby.Apply();
-//				glPointSize(10.0);
+				//				glPointSize(10.0);
 				glColor3f(1.0, 0.0, 0.0);
 				_before_interpolation->Render();
 			}
-//			if(_after_interpolation) {
-//				glEnable(GL_BLEND);
-//				glDepthMask(GL_FALSE);
-//				glBlendFunc(GL_SRC_ALPHA,GL_ONE);
-//				MatFBTurquoise.Apply();
-//				_after_interpolation->Render();
-//				glDepthMask(GL_TRUE);
-//				glDisable(GL_BLEND);
-//				cout<<"2";
-//			}
+			if(_after_interpolation) {
+				glEnable(GL_BLEND);
+				glDepthMask(GL_FALSE);
+				glBlendFunc(GL_SRC_ALPHA,GL_ONE);
+				MatFBTurquoise.Apply();
+				_after_interpolation->Render();
+				glDepthMask(GL_TRUE);
+				glDisable(GL_BLEND);
+			}
 			glDisable(GL_LIGHTING);
 			glDisable(GL_NORMALIZE);
 			glDisable(GL_LIGHT0);
+		}
 
 		glPopMatrix();
 
@@ -801,6 +802,12 @@ namespace cagd
 	void GLWidget::setShowModel(bool x){
 		if(showModel!=x){
 			showModel=x;
+			updateGL();
+		}
+	}
+	void GLWidget::setShowPatch(bool x){
+		if(showPatch!=x){
+			showPatch=x;
 			updateGL();
 		}
 	}
