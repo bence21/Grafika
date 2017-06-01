@@ -887,14 +887,17 @@ void GLWidget::addNewMesh(){
 
 void GLWidget::set_show_control_net(bool value){
     showControlNet=value;
+	updateGL();
 }
 
 void GLWidget::set_after_interpolation(bool value){
     showAfterInterpolation=value;
+	updateGL();
 }
 
 void GLWidget::set_before_interpolation(bool value){
     showBeforeInterpolation=value;
+	updateGL();
 }
 
 void GLWidget::setFirstToJoin(int first){
@@ -1035,7 +1038,7 @@ void GLWidget::moveBicubicBezierSurface(int dir, GLint i){
 }
 
 void GLWidget::join(){
-    int first = 1, second =2;
+	int first = firstToJoin, second =secondToJoin;
 
     for (int i = 0; i < 4; ++i)
     {
@@ -1066,11 +1069,11 @@ void GLWidget::join(){
         }
     }
 
-    interpolationUpdate(first);
-    interpolationUpdate(second);
+	pacthUpdate(first);
+	pacthUpdate(second);
 }
 
-void GLWidget::interpolationUpdate(int i) {
+void GLWidget::pacthUpdate(int i) {
     _patch[i].UpdateVertexBufferObjectsOfData();
     //generatethemeshofthesurface_patch
     _before_interpolation[i]=_patch[i].GenerateImage(30,30,GL_STATIC_DRAW);

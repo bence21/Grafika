@@ -56,12 +56,25 @@ namespace cagd
 		connect(_side_widget->modelRadioButton,SIGNAL(toggled(bool)),_gl_widget,SLOT(setShowModel(bool)));
 		connect(_side_widget->bicubicBezierRadioButton,SIGNAL(toggled(bool)),_gl_widget,SLOT(setShowPatch(bool)));
 
+		connect(_side_widget->firstSpinBox,SIGNAL(valueChanged(int)),_gl_widget,SLOT(setFirstToJoin(int)));
+		connect(_side_widget->secondSpinBox,SIGNAL(valueChanged(int)),_gl_widget,SLOT(setSecondToJoin(int)));
 		connect(_side_widget->joinButton,SIGNAL(clicked()),_gl_widget,SLOT(join()));
 		connect(_side_widget->directionComboBox,SIGNAL(currentIndexChanged(int)),_gl_widget,SLOT(setJoinDirection(int)));
 
 		connect(_side_widget->newMeshXSpinBox,SIGNAL(valueChanged(int)),_gl_widget,SLOT(setX(int)));
 		connect(_side_widget->newMeshYSpinBox,SIGNAL(valueChanged(int)),_gl_widget,SLOT(setY(int)));
 		connect(_side_widget->newMeshButton,SIGNAL(clicked()),_gl_widget,SLOT(addNewMesh()));
+
+		connect(_side_widget->move_down_button,SIGNAL(clicked()),_gl_widget,SLOT(moveDown()));
+		connect(_side_widget->move_up_button,SIGNAL(clicked()),_gl_widget,SLOT(moveUp()));
+		connect(_side_widget->move_left_button,SIGNAL(clicked()),_gl_widget,SLOT(moveLeft()));
+		connect(_side_widget->move_right_button,SIGNAL(clicked()),_gl_widget,SLOT(moveRight()));
+		connect(_side_widget->idSpinBox,SIGNAL(valueChanged(int)),_gl_widget,SLOT(setMovingID(int)));
+
+		connect(_side_widget->after_inter_check,SIGNAL(toggled(bool)),_gl_widget,SLOT(set_after_interpolation(bool)));
+		connect(_side_widget->before_inter_check,SIGNAL(toggled(bool)),_gl_widget,SLOT(set_before_interpolation(bool)));
+		connect(_side_widget->control_net_check,SIGNAL(toggled(bool)),_gl_widget,SLOT(set_show_control_net(bool)));
+
 	}
 
 	//--------------------------------
