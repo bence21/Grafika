@@ -45,7 +45,36 @@ HEADERS += \
     Cyclic/CyclicCurves3.h \
     Trigonometric/trigonometricbernsteinsurfaces3.h \
     Core/TensorProductSurfaces3.h \
-    Bezier/BicubicBezierPatches.h
+    Bezier/BicubicBezierPatches.h \
+    Bezier/BezierArc3.h \
+    Core/GL/glew.h \
+    Core/Colors4.h \
+    Core/Constants.h \
+    Core/HCoordinates3.h \
+    Core/Matrices.h \
+    Core/MatricesR.h \
+    Core/ShaderPrograms.h \
+    Core/TCoordinates4.h \
+    Core/TensorProductSurfaces3R.h \
+    CoreE/GL/glew.h \
+    CoreE/Colors4.h \
+    CoreE/Constants.h \
+    CoreE/DCoordinates3.h \
+    CoreE/Exceptions.h \
+    CoreE/GenericCurves3.h \
+    CoreE/HCoordinates3.h \
+    CoreE/Lights.h \
+    CoreE/LinearCombination3.h \
+    CoreE/Materials.h \
+    CoreE/Matrices.h \
+    CoreE/RealSquareMatrices.h \
+    CoreE/ShaderPrograms.h \
+    CoreE/TCoordinates4.h \
+    CoreE/TensorProductSurfaces3.h \
+    CoreE/TriangularFaces.h \
+    CoreE/TriangulatedMeshes3.h \
+    Cyclic/CyclicCurves3E.h \
+    Dependencies/Include/GL/glew.h
 
 SOURCES += \
     GUI/GLWidget.cpp \
@@ -64,7 +93,21 @@ SOURCES += \
     Core/Materials.cpp \
     Core/TensorProductSurfaces3.cpp \
     Cyclic/CyclicCurves3.cpp \
-    Bezier/BicubicBezierPatches.cpp
+    Bezier/BicubicBezierPatches.cpp \
+    Bezier/BezierArc3.cpp \
+    Bezier/BicubicBezierPatchesP.cpp \
+    Core/ShaderPrograms.cpp \
+    CoreE/GenericCurves3.cpp \
+    CoreE/Lights.cpp \
+    CoreE/LinearCombination3.cpp \
+    CoreE/Materials.cpp \
+    CoreE/RealSquareMatrices.cpp \
+    CoreE/ShaderPrograms.cpp \
+    CoreE/TensorProductSurfaces3.cpp \
+    CoreE/TriangulatedMeshes3.cpp \
+    Cyclic/CyclicCurves3E.cpp \
+    Trigonometric/trigonometricbernsteinsurfaces3.cpp \
+    test.cpp
     #Core/*.cpp \
     #Parametric/*.cpp \
     #./*.cpp
