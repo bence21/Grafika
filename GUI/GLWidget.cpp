@@ -365,7 +365,7 @@ void GLWidget::initBezierPatch() {
             cout<<"after interpolation\n";
         }
     }
-    patchNr=1;
+	patchNr=0;
 }
 
 void GLWidget::initModel() {

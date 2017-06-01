@@ -106,7 +106,7 @@ namespace cagd
 
 		void initBezierPatch();
 
-		void interpolationUpdate(int i);
+		void pacthUpdate(int i);
 
 		virtual ~GLWidget();
 
