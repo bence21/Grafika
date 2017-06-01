@@ -129,5 +129,7 @@ namespace cagd
         void setY(int);
         void moveBicubicBezierSurface(int,GLint i);
         void addNewBicubicBezierSurface(GLint x,GLint y);
+
+        void addNewMesh();
 	};
 }

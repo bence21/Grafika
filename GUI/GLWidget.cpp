@@ -870,6 +870,10 @@ void GLWidget::setY(int y){
     this->indexY=y;
 }
 
+void GLWidget::addNewMesh(){
+    addNewBicubicBezierSurface(indexX,indexY);
+}
+
 
 void GLWidget::moveBicubicBezierSurface(int dir, GLint i){
 
