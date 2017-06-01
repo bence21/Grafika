@@ -11,6 +11,7 @@
 #include"../Core/Lights.h"
 #include"../Core/TriangulatedMeshes3.h"
 #include"../Bezier/BicubicBezierPatches.h"
+#include "../Core/Materials.h"
 #include <vector>
 using namespace std;
 namespace cagd
@@ -85,6 +86,8 @@ namespace cagd
         int firstToJoin=0,secondToJoin=1;
         int movingID=0;
 
+		Material _materials[5];
+		int selectedMaterial=0;
 
 	public:
 		// special and default constructor
@@ -106,7 +109,7 @@ namespace cagd
 
 		void initBezierPatch();
 
-		void pacthUpdate(int i);
+		void patchUpdate(int i);
 
 		virtual ~GLWidget();
 
@@ -151,8 +154,7 @@ namespace cagd
         void moveLeft();
         void moveRight();
 
-
         void addNewMesh();
-
+		void setMaterialIndex(int value);
 	};
 }

@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>293</width>
-    <height>781</height>
+    <height>936</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -402,7 +402,7 @@
     </property>
     <item>
      <property name="text">
-      <string>Noth</string>
+      <string>North</string>
      </property>
     </item>
     <item>
@@ -586,6 +586,9 @@
     <property name="text">
      <string>Control net</string>
     </property>
+    <property name="checked">
+     <bool>true</bool>
+    </property>
    </widget>
    <widget class="QCheckBox" name="after_inter_check">
     <property name="geometry">
@@ -598,6 +601,9 @@
     </property>
     <property name="text">
      <string>After interpolation</string>
+    </property>
+    <property name="checked">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QCheckBox" name="before_inter_check">
@@ -615,6 +621,54 @@
     <property name="checked">
      <bool>true</bool>
     </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_5">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>770</y>
+     <width>261</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Choose materials</string>
+   </property>
+   <widget class="QComboBox" name="material_combo">
+    <property name="geometry">
+     <rect>
+      <x>120</x>
+      <y>10</y>
+      <width>131</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Brass</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Emerald</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Ruby</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Gold</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>Silver</string>
+     </property>
+    </item>
    </widget>
   </widget>
  </widget>

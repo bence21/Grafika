@@ -7,7 +7,6 @@ using namespace cagd;
 #include <Core/Exceptions.h>
 #include"../Core/Matrices.h"
 #include"../Test/TestFunctions.h"
-#include "../Core/Materials.h"
 //jhmjfgvjn
 namespace cagd
 {
@@ -293,7 +292,11 @@ void GLWidget::initializeGL()
     Color4 diffuse(0.8, 0.8, 0.8, 1.0);
     Color4 specular(1.0, 1.0, 1.0, 1.0);
     dl = new DirectionalLight(GL_LIGHT0, direction, ambient, diffuse, specular);
-
+	_materials[0] = MatFBBrass;
+	_materials[1] = MatFBEmerald;
+	_materials[2] = MatFBRuby;
+	_materials[3] = MatFBGold;
+	_materials[4] = MatFBSilver;
     initBezierPatch();
 }
 
@@ -371,9 +374,9 @@ void GLWidget::initBezierPatch() {
 void GLWidget::initModel() {
     //		glFrontFace(GL_CCW);
     //model
-    if (_mouse.LoadFromOFF("debug/Models/elephant.off", true))
+//    if (_mouse.LoadFromOFF("debug/Models/elephant.off", true))
         //					if (_mouse.LoadFromOFF("debug/Models/dinsr.off", true))
-        //		if (_mouse.LoadFromOFF("debug/Models/space.off", true))
+				if (_mouse.LoadFromOFF("debug/Models/space.off", true))
         //			if (_mouse.LoadFromOFF("debug/Models/volkswagon.off", true))
         //			if (_mouse.LoadFromOFF("debug/Models/king.off", true))
         //			if (_mouse.LoadFromOFF("debug/Models/cube.off", true))
@@ -464,9 +467,11 @@ void GLWidget::paintGL()
         parametricSurfaceRender();
     }
     if(showModel) {
+		_materials[selectedMaterial].Apply();
         modelRender();
     }
     if(showPatch) {
+		_materials[selectedMaterial].Apply();
         glEnable(GL_LIGHTING);
         glEnable(GL_NORMALIZE);
         glEnable(GL_LIGHT0);
@@ -481,7 +486,7 @@ void GLWidget::paintGL()
 
             if(showBeforeInterpolation){
                 if(_before_interpolation[k]) {
-                    MatFBRuby.Apply();
+//                    MatFBRuby.Apply();
                     //				glPointSize(10.0);
                     glColor3f(1.0, 0.0, 0.0);
                     _before_interpolation[k]->Render();
@@ -492,7 +497,7 @@ void GLWidget::paintGL()
                     glEnable(GL_BLEND);
                     glDepthMask(GL_FALSE);
                     glBlendFunc(GL_SRC_ALPHA,GL_ONE);
-                    MatFBTurquoise.Apply();
+					MatFBTurquoise.Apply();
                     _after_interpolation[k]->Render();
                     glDepthMask(GL_TRUE);
                     glDisable(GL_BLEND);
@@ -1068,12 +1073,11 @@ void GLWidget::join(){
             return;
         }
     }
-
-	pacthUpdate(first);
-	pacthUpdate(second);
+	patchUpdate(first);
+	patchUpdate(second);
 }
 
-void GLWidget::pacthUpdate(int i) {
+void GLWidget::patchUpdate(int i) {
     _patch[i].UpdateVertexBufferObjectsOfData();
     //generatethemeshofthesurface_patch
     _before_interpolation[i]=_patch[i].GenerateImage(30,30,GL_STATIC_DRAW);
@@ -1119,4 +1123,11 @@ void GLWidget::pacthUpdate(int i) {
         }
     updateGL();
 }
+
+	void GLWidget::setMaterialIndex(int value) {
+		if(selectedMaterial!=value){
+			selectedMaterial=value;
+			updateGL();
+		}
+	}
 }

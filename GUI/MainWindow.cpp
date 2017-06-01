@@ -75,6 +75,8 @@ namespace cagd
 		connect(_side_widget->before_inter_check,SIGNAL(toggled(bool)),_gl_widget,SLOT(set_before_interpolation(bool)));
 		connect(_side_widget->control_net_check,SIGNAL(toggled(bool)),_gl_widget,SLOT(set_show_control_net(bool)));
 
+		connect(_side_widget->material_combo,SIGNAL(currentIndexChanged(int)),_gl_widget,SLOT(setMaterialIndex(int)));
+
 	}
 
 	//--------------------------------
