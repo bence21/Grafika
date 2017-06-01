@@ -89,6 +89,10 @@ namespace cagd
 		Material _materials[5];
 		int selectedMaterial=0;
 
+		int lastX=-1;
+		int lastY=-1;
+		int direction=1;
+
 	public:
 		// special and default constructor
 		// the format specifies the properties of the rendering window
