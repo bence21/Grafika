@@ -121,5 +121,8 @@ namespace cagd
 
         void join();
 		void setJoinDirection(int direction);
+
+        void moveBicubicBezierSurface(int,GLint i);
+        void addNewBicubicBezierSurface(GLint x,GLint y);
 	};
 }

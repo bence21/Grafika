@@ -827,6 +827,136 @@ void GLWidget::setJoinDirection(int direction) {
 	_joinDirectionValue=direction;
 }
 
+void GLWidget::addNewBicubicBezierSurface(GLint x,GLint y){
+    patchNr++;
+    _patch.resize(patchNr);
+    _before_interpolation.resize(patchNr);
+    _after_interpolation.resize(patchNr);
+
+    GLuint i = patchNr-1;
+
+    _patch[i].SetData(0,0,x,y,0.0);
+    _patch[i].SetData(0,1,x,y+1.0,0.0);
+    _patch[i].SetData(0,2,x,y+2.0,0.0);
+    _patch[i].SetData(0,3,x,y+3.0,0.0);
+
+    _patch[i].SetData(1,0,x+1.0,y,0.0);
+    _patch[i].SetData(1,1,x+1.0,y+1.0,1.0);
+    _patch[i].SetData(1,2,x+1.0,y+2.0,0.0);
+    _patch[i].SetData(1,3,x+1.0,y+3.0,2.0);
+
+    _patch[i].SetData(2,0,x+2.0,y,0.0);
+    _patch[i].SetData(2,1,x+2.0,y+1.0,0.0);
+    _patch[i].SetData(2,2,x+2.0,y+2.0,1.0);
+    _patch[i].SetData(2,3,x+2.0,y+3.0,0.0);
+
+    _patch[i].SetData(3,0,x+3.0,y,0.0);
+    _patch[i].SetData(3,1,x+3.0,y+1.0,0.0);
+    _patch[i].SetData(3,2,x+3.0,y+2.0,0.0);
+    _patch[i].SetData(3,3,x+3.0,y+3.0,0.0);
+
+    _patch[i].UpdateVertexBufferObjectsOfData();
+
+    moveBicubicBezierSurface(4,i);
+}
+
+void GLWidget::moveBicubicBezierSurface(int dir, GLint i){
+
+
+    switch(dir){
+    case 0:
+        for(GLuint row=0;row<4;++row){
+            for(GLuint column=0;column<4;++column){
+                GLdouble xx,yy,zz;
+                _patch[i].GetData(row,column,xx,yy,zz);
+                _patch[i].SetData(row,column,xx-1,yy,zz);
+            }
+        }
+        break;
+    case 1:
+        for(GLuint row=0;row<4;++row){
+            for(GLuint column=0;column<4;++column){
+                GLdouble xx,yy,zz;
+                _patch[i].GetData(row,column,xx,yy,zz);
+                _patch[i].SetData(row,column,xx+1,yy,zz);
+            }
+        }
+
+        break;
+
+    case 2:
+        for(GLuint row=0;row<4;++row){
+            for(GLuint column=0;column<4;++column){
+                GLdouble xx,yy,zz;
+                _patch[i].GetData(row,column,xx,yy,zz);
+                _patch[i].SetData(row,column,xx,yy-1,zz);
+            }
+        }
+
+        break;
+
+    case 3:
+        for(GLuint row=0;row<4;++row){
+            for(GLuint column=0;column<4;++column){
+                GLdouble xx,yy,zz;
+                _patch[i].GetData(row,column,xx,yy,zz);
+                _patch[i].SetData(row,column,xx,yy+1,zz);
+            }
+        }
+
+        break;
+    }
+
+    _patch[i].UpdateVertexBufferObjectsOfData();
+
+    //generatethemeshofthesurface_patch
+    _before_interpolation[i]=_patch[i].GenerateImage(30,30,GL_STATIC_DRAW);
+
+    if(_before_interpolation[i])
+        _before_interpolation[i]->UpdateVertexBufferObjects();
+
+    //defineaninterpolationproblem:
+    //1:createaknotvectorinu-direction
+    RowMatrix<GLdouble> u_knot_vektor(4);
+    u_knot_vektor(0)=0.0;
+    u_knot_vektor(1)=1.0/3.0;
+    u_knot_vektor(2)=2.0/3.0;
+    u_knot_vektor(3)=1.0;
+
+    //2:createaknotvectorinv-direction
+    ColumnMatrix<GLdouble>v_knot_vektor(4);
+    v_knot_vektor(0)=0.0;
+    v_knot_vektor(1)=1.0/3.0;
+    v_knot_vektor(2)=2.0/3.0;
+    v_knot_vektor(3)=1.0;
+
+
+    //3:defineamatrixofdata_points,e.}.setthemtotheoriginalcontrolpoints
+    Matrix<DCoordinate3> data_points_to_interpolate(4,4);
+    for(GLuint row=0;row<4;++row)
+        for(GLuint column=0;column<4;++column){
+        _patch[i].GetData(row,column,data_points_to_interpolate(row,column));
+        _patch[i].GetData(row,column,_data_points[i](row,column));
+    }
+
+
+    //4:solvetheinterpolationproblemandgeneratethemeshoftheinterpolating_patch
+    if(_patch[i].UpdateDataForInterpolation(u_knot_vektor,v_knot_vektor,data_points_to_interpolate))
+    {
+
+
+        _after_interpolation[i] = _patch[i].GenerateImage(30,30,GL_STATIC_DRAW);
+
+        if(_after_interpolation[i])
+            _after_interpolation[i]->UpdateVertexBufferObjects();
+    }
+
+    for(GLuint row=0;row<4;++row)
+        for(GLuint column=0;column<4;++column){
+        _patch[i].SetData(row,column,_data_points[i](row,column));
+    }
+}
+
 void GLWidget::join(){
 	int first = 0, second =1;
 
