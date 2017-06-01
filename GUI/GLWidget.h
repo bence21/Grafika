@@ -106,5 +106,7 @@ namespace cagd
 		void setShowParametricSurface(bool x);
 		void setShowModel(bool x);
 		void setShowPatch(bool x);
+
+        void join();
 	};
 }
