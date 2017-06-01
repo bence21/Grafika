@@ -50,6 +50,8 @@ GLWidget::~GLWidget(){
 //--------------------------------
 GLWidget::GLWidget(QWidget *parent, const QGLFormat &format): QGLWidget(format, parent)
 {
+    indexX=0;
+    indexY=0;
 }
 
 //--------------------------------------------------------------------------------------
@@ -859,6 +861,15 @@ void GLWidget::addNewBicubicBezierSurface(GLint x,GLint y){
 
     moveBicubicBezierSurface(4,i);
 }
+
+void GLWidget::setX(int x){
+    this->indexX = x;
+}
+
+void GLWidget::setY(int y){
+    this->indexY=y;
+}
+
 
 void GLWidget::moveBicubicBezierSurface(int dir, GLint i){
 

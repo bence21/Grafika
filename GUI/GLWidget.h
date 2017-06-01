@@ -71,6 +71,8 @@ namespace cagd
 
 
         GLuint patchNr;
+        GLint indexX;
+        GLint indexY;
 
 
 		vector<BicubicBezierPatch> _patch;
@@ -122,6 +124,9 @@ namespace cagd
         void join();
 		void setJoinDirection(int direction);
 
+
+        void setX(int);
+        void setY(int);
         void moveBicubicBezierSurface(int,GLint i);
         void addNewBicubicBezierSurface(GLint x,GLint y);
 	};
