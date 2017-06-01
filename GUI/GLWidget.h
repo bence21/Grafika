@@ -73,7 +73,8 @@ namespace cagd
         GLuint patchNr;
 
 
-        std::vector<cagd::BicubicBezierPatch> _patch;
+		vector<BicubicBezierPatch> _patch;
+		vector<Matrix<DCoordinate3>> _data_points;
         GLint _joinDirectionValue;
 
 	public:
@@ -119,5 +120,6 @@ namespace cagd
 		void setShowPatch(bool x);
 
         void join();
+		void setJoinDirection(int direction);
 	};
 }
