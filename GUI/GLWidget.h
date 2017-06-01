@@ -11,6 +11,8 @@
 #include"../Core/Lights.h"
 #include"../Core/TriangulatedMeshes3.h"
 #include"../Bezier/BicubicBezierPatches.h"
+#include <vector>
+using namespace std;
 namespace cagd
 {
 	class GLWidget: public QGLWidget
@@ -62,8 +64,17 @@ namespace cagd
 		GLfloat _angle;
 
 		bool showPatch;
-		BicubicBezierPatch _patch;
-		TriangulatedMesh3 *_before_interpolation,*_after_interpolation;
+        //BicubicBezierPatch _patch;
+        vector<TriangulatedMesh3*> _before_interpolation;
+        vector<TriangulatedMesh3*> _after_interpolation;
+
+
+
+        GLuint patchNr;
+
+
+        std::vector<cagd::BicubicBezierPatch> _patch;
+        GLint _joinDirectionValue;
 
 	public:
 		// special and default constructor

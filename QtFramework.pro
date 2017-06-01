@@ -45,8 +45,6 @@ HEADERS += \
     Cyclic/CyclicCurves3.h \
     Trigonometric/trigonometricbernsteinsurfaces3.h \
     Core/TensorProductSurfaces3.h \
-    Bezier/BicubicBezierPatches.h \
-    Bezier/BezierArc3.h \
     Core/GL/glew.h \
     Core/Colors4.h \
     Core/Constants.h \
@@ -73,8 +71,8 @@ HEADERS += \
     CoreE/TensorProductSurfaces3.h \
     CoreE/TriangularFaces.h \
     CoreE/TriangulatedMeshes3.h \
-    Cyclic/CyclicCurves3E.h \
-    Dependencies/Include/GL/glew.h
+    Dependencies/Include/GL/glew.h \
+    ../../BicubicBezierPatches.h
 
 SOURCES += \
     GUI/GLWidget.cpp \
@@ -94,7 +92,6 @@ SOURCES += \
     Core/TensorProductSurfaces3.cpp \
     Cyclic/CyclicCurves3.cpp \
     Bezier/BicubicBezierPatches.cpp \
-    Bezier/BezierArc3.cpp \
     Bezier/BicubicBezierPatchesP.cpp \
     Core/ShaderPrograms.cpp \
     CoreE/GenericCurves3.cpp \
@@ -105,7 +102,6 @@ SOURCES += \
     CoreE/ShaderPrograms.cpp \
     CoreE/TensorProductSurfaces3.cpp \
     CoreE/TriangulatedMeshes3.cpp \
-    Cyclic/CyclicCurves3E.cpp \
     Trigonometric/trigonometricbernsteinsurfaces3.cpp \
     test.cpp
     #Core/*.cpp \
