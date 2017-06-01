@@ -1008,52 +1008,54 @@ namespace cagd
 			}
 		}
 
-		for(int i =0;i<patchNr;i++){
-			_patch[i].UpdateVertexBufferObjectsOfData();
+		interpolationUpdate(first);
+		interpolationUpdate(second);
+	}
 
-			//generatethemeshofthesurface_patch
-			_before_interpolation[i]=_patch[i].GenerateImage(30,30,GL_STATIC_DRAW);
+	void GLWidget::interpolationUpdate(int i) {
+		_patch[i].UpdateVertexBufferObjectsOfData();
+		//generatethemeshofthesurface_patch
+		_before_interpolation[i]=_patch[i].GenerateImage(30,30,GL_STATIC_DRAW);
 
-			if(_before_interpolation[i])
-				_before_interpolation[i]->UpdateVertexBufferObjects();
+		if(_before_interpolation[i])
+			_before_interpolation[i]->UpdateVertexBufferObjects();
 
-			//defineaninterpolationproblem:
-			//1:createaknotvectorinu-direction
-			RowMatrix<GLdouble> u_knot_vektor(4);
-			u_knot_vektor(0)=0.0;
-			u_knot_vektor(1)=1.0/3.0;
-			u_knot_vektor(2)=2.0/3.0;
-			u_knot_vektor(3)=1.0;
+		//defineaninterpolationproblem:
+		//1:createaknotvectorinu-direction
+		RowMatrix<GLdouble> u_knot_vektor(4);
+		u_knot_vektor(0)=0.0;
+		u_knot_vektor(1)=1.0/3.0;
+		u_knot_vektor(2)=2.0/3.0;
+		u_knot_vektor(3)=1.0;
 
-			//2:createaknotvectorinv-direction
-			ColumnMatrix<GLdouble>v_knot_vektor(4);
-			v_knot_vektor(0)=0.0;
-			v_knot_vektor(1)=1.0/3.0;
-			v_knot_vektor(2)=2.0/3.0;
-			v_knot_vektor(3)=1.0;
+		//2:createaknotvectorinv-direction
+		ColumnMatrix<GLdouble>v_knot_vektor(4);
+		v_knot_vektor(0)=0.0;
+		v_knot_vektor(1)=1.0/3.0;
+		v_knot_vektor(2)=2.0/3.0;
+		v_knot_vektor(3)=1.0;
 
-			//3:defineamatrixofdata_points,e.}.setthemtotheoriginalcontrolpoints
-			Matrix<DCoordinate3> data_points_to_interpolate(4,4);
-			for(GLuint row=0;row<4;++row)
-				for(GLuint column=0;column<4;++column){
-					_patch[i].GetData(row,column,data_points_to_interpolate(row,column));
-					_patch[i].GetData(row,column,_data_points[i](row,column));
-				}
-
-			//4:solvetheinterpolationproblemandgeneratethemeshoftheinterpolating_patch
-			if(_patch[i].UpdateDataForInterpolation(u_knot_vektor,v_knot_vektor,data_points_to_interpolate))
-			{
-
-				_after_interpolation[i] = _patch[i].GenerateImage(30,30,GL_STATIC_DRAW);
-
-				if(_after_interpolation[i])
-					_after_interpolation[i]->UpdateVertexBufferObjects();
+		//3:defineamatrixofdata_points,e.}.setthemtotheoriginalcontrolpoints
+		Matrix<DCoordinate3> data_points_to_interpolate(4,4);
+		for(GLuint row=0;row<4;++row)
+			for(GLuint column=0;column<4;++column){
+				_patch[i].GetData(row,column,data_points_to_interpolate(row,column));
+				_patch[i].GetData(row,column,_data_points[i](row,column));
 			}
-			for(GLuint row=0;row<4;++row)
-				for(GLuint column=0;column<4;++column){
-					_patch[i].SetData(row,column,_data_points[i](row,column));
-				}
-			updateGL();
+
+		//4:solvetheinterpolationproblemandgeneratethemeshoftheinterpolating_patch
+		if(_patch[i].UpdateDataForInterpolation(u_knot_vektor,v_knot_vektor,data_points_to_interpolate))
+		{
+
+			_after_interpolation[i] = _patch[i].GenerateImage(30,30,GL_STATIC_DRAW);
+
+			if(_after_interpolation[i])
+				_after_interpolation[i]->UpdateVertexBufferObjects();
 		}
+		for(GLuint row=0;row<4;++row)
+			for(GLuint column=0;column<4;++column){
+				_patch[i].SetData(row,column,_data_points[i](row,column));
+			}
+		updateGL();
 	}
 }

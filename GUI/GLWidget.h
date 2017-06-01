@@ -99,6 +99,8 @@ namespace cagd
 
 		void initBezierPatch();
 
+		void interpolationUpdate(int i);
+
 		virtual ~GLWidget();
 
 	public slots:
