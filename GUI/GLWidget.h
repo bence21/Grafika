@@ -74,10 +74,17 @@ namespace cagd
         GLint indexX;
         GLint indexY;
 
-
 		vector<BicubicBezierPatch> _patch;
 		vector<Matrix<DCoordinate3>> _data_points;
         GLint _joinDirectionValue;
+
+        bool showControlNet=true;
+        bool showBeforeInterpolation=true;
+        bool showAfterInterpolation=true;
+
+        int firstToJoin=0,secondToJoin=1;
+        int movingID=0;
+
 
 	public:
 		// special and default constructor
@@ -132,6 +139,20 @@ namespace cagd
         void moveBicubicBezierSurface(int,GLint i);
         void addNewBicubicBezierSurface(GLint x,GLint y);
 
+        void set_show_control_net(bool);
+        void set_after_interpolation(bool);
+        void set_before_interpolation(bool);
+        void setFirstToJoin(int);
+        void setSecondToJoin(int);
+        void setMovingID(int);
+
+        void moveUp();
+        void moveDown();
+        void moveLeft();
+        void moveRight();
+
+
         void addNewMesh();
+
 	};
 }
