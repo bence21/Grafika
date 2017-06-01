@@ -54,6 +54,7 @@ namespace cagd
 		connect(_side_widget->cyclicRadioButton,SIGNAL(toggled(bool)),_gl_widget,SLOT(setShowCyclicCurve(bool)));
 		connect(_side_widget->parametricSurfaceRadioButton,SIGNAL(toggled(bool)),_gl_widget,SLOT(setShowParametricSurface(bool)));
 		connect(_side_widget->modelRadioButton,SIGNAL(toggled(bool)),_gl_widget,SLOT(setShowModel(bool)));
+		connect(_side_widget->bicubicBezierRadioButton,SIGNAL(toggled(bool)),_gl_widget,SLOT(setShowPatch(bool)));
     }
 
     //--------------------------------

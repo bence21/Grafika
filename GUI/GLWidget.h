@@ -61,6 +61,7 @@ namespace cagd
 		TriangulatedMesh3 _mouse;
 		GLfloat _angle;
 
+		bool showPatch;
 		BicubicBezierPatch _patch;
 		TriangulatedMesh3 *_before_interpolation,*_after_interpolation;
 
@@ -104,5 +105,6 @@ namespace cagd
 		void setShowCyclicCurve(bool x);
 		void setShowParametricSurface(bool x);
 		void setShowModel(bool x);
+		void setShowPatch(bool x);
 	};
 }
