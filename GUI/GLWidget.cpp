@@ -8,7 +8,7 @@ using namespace cagd;
 #include"../Core/Matrices.h"
 #include"../Test/TestFunctions.h"
 #include "../Core/Materials.h"
-
+//jhmjfgvjn
 namespace cagd
 {
 
@@ -811,4 +811,93 @@ namespace cagd
 			updateGL();
 		}
 	}
+
+    void GLWidget::join(){
+        int first = 0, second =1;
+
+        for (int i = 0; i < 4; ++i)
+        {
+            switch (_joinDirectionValue)
+            {
+            case 0:
+                //North
+                _patch[second](i, 1) = 2*_patch[first](i, 3) - _patch[first](i, 2);
+                _patch[second](i, 0) = _patch[first](i, 3);
+                // _patch[first].joins[0] = second;
+                // _patch[second].joins[1] = first;
+                break;
+                    case 1:
+                //South
+                _patch[second](i, 2) = 2*_patch[first](i, 0) - _patch[first](i, 1);
+                _patch[second](i, 3) = _patch[first](i, 0);
+                // _patch[first].joins[1] = second;
+                // _patch[second].joins[2] = first;
+                break;
+                    case 2:
+                //East
+                _patch[second](1, i) = 2*_patch[first](3, i) - _patch[first](2, i);
+                _patch[second](0, i) = _patch[first](3, i);
+                // _patch[first].joins[2] = second;
+                //_patch[second].joins[3] = first;
+                break;
+                    case 3:
+                //West
+                _patch[second](2, i) = 2*_patch[first](0, i) - _patch[first](1, i);
+                _patch[second](3, i) = _patch[first](0, i);
+                // _patch[first].joins[3] = second;
+                //_patch[second].joins[2] = first;
+                break;
+                    default:
+                return;
+            }
+        }
+
+        for(int i =0;i<n;i++){
+            _patch[i].UpdateVertexBufferObjectsOfData();
+
+            //generatethemeshofthesurface_patch
+            _before_interpolation[i]=_patch[i].GenerateImage(30,30,GL_STATIC_DRAW);
+
+            if(_before_interpolation[i])
+                _before_interpolation[i]->UpdateVertexBufferObjects();
+
+            //defineaninterpolationproblem:
+            //1:createaknotvectorinu-direction
+            RowMatrix<GLdouble> u_knot_vektor(4);
+            u_knot_vektor(0)=0.0;
+            u_knot_vektor(1)=1.0/3.0;
+            u_knot_vektor(2)=2.0/3.0;
+            u_knot_vektor(3)=1.0;
+
+            //2:createaknotvectorinv-direction
+            ColumnMatrix<GLdouble>v_knot_vektor(4);
+            v_knot_vektor(0)=0.0;
+            v_knot_vektor(1)=1.0/3.0;
+            v_knot_vektor(2)=2.0/3.0;
+            v_knot_vektor(3)=1.0;
+
+            //3:defineamatrixofdata_points,e.}.setthemtotheoriginalcontrolpoints
+            Matrix<DCoordinate3> data_points_to_interpolate(4,4);
+            for(GLuint row=0;row<4;++row)
+                for(GLuint column=0;column<4;++column){
+                _patch[i].GetData(row,column,data_points_to_interpolate(row,column));
+                _patch[i].GetData(row,column,_data_points[i](row,column));
+            }
+
+            //4:solvetheinterpolationproblemandgeneratethemeshoftheinterpolating_patch
+            if(_patch[i].UpdateDataForInterpolation(u_knot_vektor,v_knot_vektor,data_points_to_interpolate))
+            {
+
+                _after_interpolation[i] = _patch[i].GenerateImage(30,30,GL_STATIC_DRAW);
+
+                if(_after_interpolation[i])
+                    _after_interpolation[i]->UpdateVertexBufferObjects();
+            }
+            for(GLuint row=0;row<4;++row)
+                for(GLuint column=0;column<4;++column){
+                _patch[i].SetData(row,column,_data_points[i](row,column));
+            }
+            updateGL();
+        }
+    }
 }
