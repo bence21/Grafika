@@ -298,6 +298,7 @@ namespace cagd
 	}
 
 	void GLWidget::initBezierPatch() {
+		_joinDirectionValue=0;
 #define MAX_DATA_POINTS 100
 		_data_points.resize(MAX_DATA_POINTS);
 		for(int i=0;i<MAX_DATA_POINTS;++i) {
@@ -972,10 +973,11 @@ namespace cagd
 			for(GLuint column=0;column<4;++column){
 				_patch[i].SetData(row,column,_data_points[i](row,column));
 			}
+		updateGL();
 	}
 
 	void GLWidget::join(){
-		int first = 0, second =1;
+		int first = 1, second =2;
 
 		for (int i = 0; i < 4; ++i)
 		{
@@ -985,29 +987,21 @@ namespace cagd
 				//North
 				_patch[second](i, 1) = 2*_patch[first](i, 3) - _patch[first](i, 2);
 				_patch[second](i, 0) = _patch[first](i, 3);
-				// _patch[first].joins[0] = second;
-				// _patch[second].joins[1] = first;
 				break;
 			case 1:
 				//South
 				_patch[second](i, 2) = 2*_patch[first](i, 0) - _patch[first](i, 1);
 				_patch[second](i, 3) = _patch[first](i, 0);
-				// _patch[first].joins[1] = second;
-				// _patch[second].joins[2] = first;
 				break;
 			case 2:
 				//East
 				_patch[second](1, i) = 2*_patch[first](3, i) - _patch[first](2, i);
 				_patch[second](0, i) = _patch[first](3, i);
-				// _patch[first].joins[2] = second;
-				//_patch[second].joins[3] = first;
 				break;
 			case 3:
 				//West
 				_patch[second](2, i) = 2*_patch[first](0, i) - _patch[first](1, i);
 				_patch[second](3, i) = _patch[first](0, i);
-				// _patch[first].joins[3] = second;
-				//_patch[second].joins[2] = first;
 				break;
 			default:
 				return;

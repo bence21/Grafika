@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>293</width>
-    <height>646</height>
+    <height>759</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -43,7 +43,7 @@
       <x>3</x>
       <y>21</y>
       <width>261</width>
-      <height>421</height>
+      <height>381</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout">
@@ -301,54 +301,11 @@
     </layout>
    </widget>
   </widget>
-  <widget class="QPushButton" name="joinButton">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>450</y>
-     <width>93</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Join</string>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="directionComboBox">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>450</y>
-     <width>101</width>
-     <height>22</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>Noth</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>South</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>East</string>
-    </property>
-   </item>
-   <item>
-    <property name="text">
-     <string>West</string>
-    </property>
-   </item>
-  </widget>
   <widget class="QGroupBox" name="groupBox_2">
    <property name="geometry">
     <rect>
      <x>10</x>
-     <y>490</y>
+     <y>530</y>
      <width>261</width>
      <height>80</height>
     </rect>
@@ -413,6 +370,62 @@
     </property>
     <property name="text">
      <string>Add</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QGroupBox" name="groupBox_3">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>420</y>
+     <width>261</width>
+     <height>80</height>
+    </rect>
+   </property>
+   <property name="title">
+    <string>Join</string>
+   </property>
+   <widget class="QComboBox" name="directionComboBox">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>20</y>
+      <width>101</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <item>
+     <property name="text">
+      <string>Noth</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>South</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>East</string>
+     </property>
+    </item>
+    <item>
+     <property name="text">
+      <string>West</string>
+     </property>
+    </item>
+   </widget>
+   <widget class="QPushButton" name="joinButton">
+    <property name="geometry">
+     <rect>
+      <x>152</x>
+      <y>20</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Join</string>
     </property>
    </widget>
   </widget>
