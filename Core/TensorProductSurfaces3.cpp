@@ -148,7 +148,7 @@ DCoordinate3& TensorProductSurface3::operator ()(GLuint row, GLuint column)
 // generates the image (i.e., the approximating triangulated mesh) of the tensor product surface
 TriangulatedMesh3* TensorProductSurface3::GenerateImage(GLuint u_div_point_count, GLuint v_div_point_count, GLenum usage_flag) const
 {
-	cout << _data << endl;
+//	cout << _data << endl;
 	if (u_div_point_count <= 1 || v_div_point_count <= 1)
 		return GL_FALSE;
 
@@ -230,10 +230,10 @@ TriangulatedMesh3* TensorProductSurface3::GenerateImage(GLuint u_div_point_count
 		}
 	}
 
-	for (GLuint i = 0; i < vertex_count; i++)
-	{
-		cout << (*result)._vertex[i] << endl;
-	}
+//	for (GLuint i = 0; i < vertex_count; i++)
+//	{
+//		cout << (*result)._vertex[i] << endl;
+//	}
 
 	return result;
 }

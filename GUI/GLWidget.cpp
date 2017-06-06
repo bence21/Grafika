@@ -374,9 +374,9 @@ namespace cagd
 	void GLWidget::initModel() {
 		//		glFrontFace(GL_CCW);
 		//model
-		//    if (_mouse.LoadFromOFF("debug/Models/elephant.off", true))
+			if (_mouse.LoadFromOFF("debug/Models/elephant.off", true))
 		//					if (_mouse.LoadFromOFF("debug/Models/dinsr.off", true))
-		if (_mouse.LoadFromOFF("debug/Models/space.off", true))
+//		if (_mouse.LoadFromOFF("debug/Models/space.off", true))
 			//			if (_mouse.LoadFromOFF("debug/Models/volkswagon.off", true))
 			//			if (_mouse.LoadFromOFF("debug/Models/king.off", true))
 			//			if (_mouse.LoadFromOFF("debug/Models/cube.off", true))
@@ -897,62 +897,63 @@ namespace cagd
 		_after_interpolation.resize(patchNr);
 
 		GLuint i = patchNr-1;
-		_patch[i].SetData(0,0,x,y,0.0);
-		_patch[i].SetData(0,1,x,y+1.0,0.0);
-		_patch[i].SetData(0,2,x,y+2.0,0.0);
-		_patch[i].SetData(0,3,x,y+3.0,0.0);
+//		_patch[i].SetData(0,0,x,y,0.0);
+//		_patch[i].SetData(0,1,x,y+1.0,0.0);
+//		_patch[i].SetData(0,2,x,y+2.0,0.0);
+//		_patch[i].SetData(0,3,x,y+3.0,0.0);
 
-		_patch[i].SetData(1,0,x+1.0,y,0.0);
-		_patch[i].SetData(1,1,x+1.0,y+1.0,1.0);
-		_patch[i].SetData(1,2,x+1.0,y+2.0,0.0);
-		_patch[i].SetData(1,3,x+1.0,y+3.0,2.0);
+//		_patch[i].SetData(1,0,x+1.0,y,0.0);
+//		_patch[i].SetData(1,1,x+1.0,y+1.0,1.0);
+//		_patch[i].SetData(1,2,x+1.0,y+2.0,0.0);
+//		_patch[i].SetData(1,3,x+1.0,y+3.0,2.0);
 
-		_patch[i].SetData(2,0,x+2.0,y,0.0);
-		_patch[i].SetData(2,1,x+2.0,y+1.0,0.0);
-		_patch[i].SetData(2,2,x+2.0,y+2.0,1.0);
-		_patch[i].SetData(2,3,x+2.0,y+3.0,0.0);
+//		_patch[i].SetData(2,0,x+2.0,y,0.0);
+//		_patch[i].SetData(2,1,x+2.0,y+1.0,0.0);
+//		_patch[i].SetData(2,2,x+2.0,y+2.0,1.0);
+//		_patch[i].SetData(2,3,x+2.0,y+3.0,0.0);
 
-		_patch[i].SetData(3,0,x+3.0,y,0.0);
-		_patch[i].SetData(3,1,x+3.0,y+1.0,0.0);
-		_patch[i].SetData(3,2,x+3.0,y+2.0,0.0);
-		_patch[i].SetData(3,3,x+3.0,y+3.0,0.0);
+//		_patch[i].SetData(3,0,x+3.0,y,0.0);
+//		_patch[i].SetData(3,1,x+3.0,y+1.0,0.0);
+//		_patch[i].SetData(3,2,x+3.0,y+2.0,0.0);
+//		_patch[i].SetData(3,3,x+3.0,y+3.0,0.0);
 
 		//Random
 		int z;
-		z=rand()%5-2;
+		int q=3,p=1;
+		z=rand()%q-p;
 		_patch[i].SetData(0,0,x,y,z);
-		z=rand()%5-2;
+		z=rand()%q-p;
 		_patch[i].SetData(0,1,x,y+1.0,z);
-		z=rand()%5-2;
+		z=rand()%q-p;
 		_patch[i].SetData(0,2,x,y+2.0,z);
-		z=rand()%5-2;
+		z=rand()%q-p;
 		_patch[i].SetData(0,3,x,y+3.0,z);
 
-		z=rand()%5-2;
+		z=rand()%q-p;
 		_patch[i].SetData(1,0,x+1.0,y,z);
-		z=rand()%5-2;
+		z=rand()%q-p;
 		_patch[i].SetData(1,1,x+1.0,y+1.0,z);
-		z=rand()%5-2;
+		z=rand()%q-p;
 		_patch[i].SetData(1,2,x+1.0,y+2.0,z);
-		z=rand()%5-2;
+		z=rand()%q-p;
 		_patch[i].SetData(1,3,x+1.0,y+3.0,z);
 
-		z=rand()%5-2;
+		z=rand()%q-p;
 		_patch[i].SetData(2,0,x+2.0,y,z);
-		z=rand()%5-2;
+		z=rand()%q-p;
 		_patch[i].SetData(2,1,x+2.0,y+1.0,z);
-		z=rand()%5-2;
+		z=rand()%q-p;
 		_patch[i].SetData(2,2,x+2.0,y+2.0,z);
-		z=rand()%5-2;
+		z=rand()%q-p;
 		_patch[i].SetData(2,3,x+2.0,y+3.0,z);
 
-		z=rand()%5-2;
+		z=rand()%q-p;
 		_patch[i].SetData(3,0,x+3.0,y,z);
-		z=rand()%5-2;
+		z=rand()%q-p;
 		_patch[i].SetData(3,1,x+3.0,y+1.0,z);
-		z=rand()%5-2;
+		z=rand()%q-p;
 		_patch[i].SetData(3,2,x+3.0,y+2.0,z);
-		z=rand()%5-2;
+		z=rand()%q-p;
 		_patch[i].SetData(3,3,x+3.0,y+3.0,z);
 
 		_patch[i].UpdateVertexBufferObjectsOfData();
@@ -1090,8 +1091,9 @@ namespace cagd
 	}
 
 	void GLWidget::moveBicubicBezierSurface(int dir, GLint i){
-
-
+		if(i>=patchNr) {
+			return;
+		}
 		switch(dir){
 		case 0:
 			for(GLuint row=0;row<4;++row){
@@ -1110,9 +1112,7 @@ namespace cagd
 					_patch[i].SetData(row,column,xx+1,yy,zz);
 				}
 			}
-
 			break;
-
 		case 2:
 			for(GLuint row=0;row<4;++row){
 				for(GLuint column=0;column<4;++column){
@@ -1121,9 +1121,7 @@ namespace cagd
 					_patch[i].SetData(row,column,xx,yy-1,zz);
 				}
 			}
-
 			break;
-
 		case 3:
 			for(GLuint row=0;row<4;++row){
 				for(GLuint column=0;column<4;++column){
@@ -1132,7 +1130,6 @@ namespace cagd
 					_patch[i].SetData(row,column,xx,yy+1,zz);
 				}
 			}
-
 			break;
 		}
 
@@ -1159,7 +1156,6 @@ namespace cagd
 		v_knot_vektor(2)=2.0/3.0;
 		v_knot_vektor(3)=1.0;
 
-
 		//3:defineamatrixofdata_points,e.}.setthemtotheoriginalcontrolpoints
 		Matrix<DCoordinate3> data_points_to_interpolate(4,4);
 		for(GLuint row=0;row<4;++row)
@@ -1168,12 +1164,9 @@ namespace cagd
 				_patch[i].GetData(row,column,_data_points[i](row,column));
 			}
 
-
 		//4:solvetheinterpolationproblemandgeneratethemeshoftheinterpolating_patch
 		if(_patch[i].UpdateDataForInterpolation(u_knot_vektor,v_knot_vektor,data_points_to_interpolate))
 		{
-
-
 			_after_interpolation[i] = _patch[i].GenerateImage(30,30,GL_STATIC_DRAW);
 
 			if(_after_interpolation[i])
@@ -1218,7 +1211,7 @@ namespace cagd
 				return;
 			}
 		}
-		patchUpdate(first);
+//		patchUpdate(first);
 		patchUpdate(second);
 	}
 
