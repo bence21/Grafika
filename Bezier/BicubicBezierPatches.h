@@ -6,10 +6,13 @@
 namespace cagd
 {
     class BicubicBezierPatch: public TensorProductSurface3
-    {
-        //...
-
+	{
     public:
+		GLuint north=-1;
+		GLuint east=-1;
+		GLuint south=-1;
+		GLuint west=-1;
+
         BicubicBezierPatch();
 
         //we have to implement pure virtual methods introduced in class TensorProductSurface3

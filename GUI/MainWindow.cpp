@@ -77,6 +77,10 @@ namespace cagd
 
 		connect(_side_widget->material_combo,SIGNAL(currentIndexChanged(int)),_gl_widget,SLOT(setMaterialIndex(int)));
 
+		connect(_side_widget->upPushButton,SIGNAL(clicked()),_gl_widget,SLOT(onUpChangeControl()));
+		connect(_side_widget->patchIndexSpinBox,SIGNAL(valueChanged(int)),_gl_widget,SLOT(setChangeControlIndexPatch(int)));
+		connect(_side_widget->iSpinBox,SIGNAL(valueChanged(int)),_gl_widget,SLOT(setChangeControlIndexI(int)));
+		connect(_side_widget->jSpinBox,SIGNAL(valueChanged(int)),_gl_widget,SLOT(setChangeControlIndexJ(int)));
 	}
 
 	//--------------------------------

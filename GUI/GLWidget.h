@@ -93,6 +93,10 @@ namespace cagd
 		int lastY=-1;
 		int direction=1;
 
+		int changeControlIndexPatch=0;
+		int changeControlIndexI=0;
+		int changeControlIndexJ=0;
+
 	public:
 		// special and default constructor
 		// the format specifies the properties of the rendering window
@@ -116,6 +120,8 @@ namespace cagd
 		void patchUpdate(int i);
 
 		virtual ~GLWidget();
+		void addNewBicubicBezierSurface(GLint x,GLint y);
+		void modifyZ(GLdouble z,bool first);
 
 	public slots:
 		void _animate();
@@ -143,8 +149,7 @@ namespace cagd
 
         void setX(int);
         void setY(int);
-        void moveBicubicBezierSurface(int,GLint i);
-        void addNewBicubicBezierSurface(GLint x,GLint y);
+		void moveBicubicBezierSurface(int,GLint i);
 
         void set_show_control_net(bool);
         void set_after_interpolation(bool);
@@ -160,5 +165,11 @@ namespace cagd
 
         void addNewMesh();
 		void setMaterialIndex(int value);
+
+		void setChangeControlIndexPatch(int patchNr);
+		void setChangeControlIndexI(int i);
+		void setChangeControlIndexJ(int j);
+
+		void onUpChangeControl();
 	};
 }
