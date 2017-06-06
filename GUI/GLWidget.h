@@ -122,6 +122,7 @@ namespace cagd
 		virtual ~GLWidget();
 		void addNewBicubicBezierSurface(GLint x,GLint y);
 		void modifyZ(GLdouble z,bool first);
+		void join(int first,int second,int joinDirectionValue);
 
 	public slots:
 		void _animate();
@@ -171,5 +172,6 @@ namespace cagd
 		void setChangeControlIndexJ(int j);
 
 		void onUpChangeControl();
+		void onDownChangeControl();
 	};
 }

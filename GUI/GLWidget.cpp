@@ -372,9 +372,9 @@ namespace cagd
 	void GLWidget::initModel() {
 		//		glFrontFace(GL_CCW);
 		//model
-			if (_mouse.LoadFromOFF("debug/Models/elephant.off", true))
-		//					if (_mouse.LoadFromOFF("debug/Models/dinsr.off", true))
-//		if (_mouse.LoadFromOFF("debug/Models/space.off", true))
+		if (_mouse.LoadFromOFF("debug/Models/elephant.off", true))
+			//					if (_mouse.LoadFromOFF("debug/Models/dinsr.off", true))
+			//		if (_mouse.LoadFromOFF("debug/Models/space.off", true))
 			//			if (_mouse.LoadFromOFF("debug/Models/volkswagon.off", true))
 			//			if (_mouse.LoadFromOFF("debug/Models/king.off", true))
 			//			if (_mouse.LoadFromOFF("debug/Models/cube.off", true))
@@ -495,7 +495,7 @@ namespace cagd
 						glEnable(GL_BLEND);
 						glDepthMask(GL_FALSE);
 						glBlendFunc(GL_SRC_ALPHA,GL_ONE);
-//						MatFBSilver.Apply();
+						//						MatFBSilver.Apply();
 						MatFBTurquoise.Apply();
 						_after_interpolation[k]->Render();
 						glDepthMask(GL_TRUE);
@@ -896,25 +896,25 @@ namespace cagd
 		_after_interpolation.resize(patchNr);
 
 		GLuint i = patchNr-1;
-//		_patch[i].SetData(0,0,x,y,0.0);
-//		_patch[i].SetData(0,1,x,y+1.0,0.0);
-//		_patch[i].SetData(0,2,x,y+2.0,0.0);
-//		_patch[i].SetData(0,3,x,y+3.0,0.0);
+		//		_patch[i].SetData(0,0,x,y,0.0);
+		//		_patch[i].SetData(0,1,x,y+1.0,0.0);
+		//		_patch[i].SetData(0,2,x,y+2.0,0.0);
+		//		_patch[i].SetData(0,3,x,y+3.0,0.0);
 
-//		_patch[i].SetData(1,0,x+1.0,y,0.0);
-//		_patch[i].SetData(1,1,x+1.0,y+1.0,1.0);
-//		_patch[i].SetData(1,2,x+1.0,y+2.0,0.0);
-//		_patch[i].SetData(1,3,x+1.0,y+3.0,2.0);
+		//		_patch[i].SetData(1,0,x+1.0,y,0.0);
+		//		_patch[i].SetData(1,1,x+1.0,y+1.0,1.0);
+		//		_patch[i].SetData(1,2,x+1.0,y+2.0,0.0);
+		//		_patch[i].SetData(1,3,x+1.0,y+3.0,2.0);
 
-//		_patch[i].SetData(2,0,x+2.0,y,0.0);
-//		_patch[i].SetData(2,1,x+2.0,y+1.0,0.0);
-//		_patch[i].SetData(2,2,x+2.0,y+2.0,1.0);
-//		_patch[i].SetData(2,3,x+2.0,y+3.0,0.0);
+		//		_patch[i].SetData(2,0,x+2.0,y,0.0);
+		//		_patch[i].SetData(2,1,x+2.0,y+1.0,0.0);
+		//		_patch[i].SetData(2,2,x+2.0,y+2.0,1.0);
+		//		_patch[i].SetData(2,3,x+2.0,y+3.0,0.0);
 
-//		_patch[i].SetData(3,0,x+3.0,y,0.0);
-//		_patch[i].SetData(3,1,x+3.0,y+1.0,0.0);
-//		_patch[i].SetData(3,2,x+3.0,y+2.0,0.0);
-//		_patch[i].SetData(3,3,x+3.0,y+3.0,0.0);
+		//		_patch[i].SetData(3,0,x+3.0,y,0.0);
+		//		_patch[i].SetData(3,1,x+3.0,y+1.0,0.0);
+		//		_patch[i].SetData(3,2,x+3.0,y+2.0,0.0);
+		//		_patch[i].SetData(3,3,x+3.0,y+3.0,0.0);
 
 		//Random
 		int z;
@@ -1181,10 +1181,14 @@ namespace cagd
 
 	void GLWidget::join(){
 		int first = firstToJoin, second =secondToJoin;
+		join(first,second,_joinDirectionValue);
+	}
+
+	void GLWidget::join(int first,int second,int joinDirectionValue){
 
 		for (int i = 0; i < 4; ++i)
 		{
-			switch (_joinDirectionValue)
+			switch (joinDirectionValue)
 			{
 			case 0:
 				//North
@@ -1218,7 +1222,7 @@ namespace cagd
 				return;
 			}
 		}
-//		patchUpdate(first);
+		//		patchUpdate(first);
 		patchUpdate(second);
 	}
 
@@ -1276,8 +1280,8 @@ namespace cagd
 		}
 	}
 
-	void GLWidget::setChangeControlIndexPatch(int patchNr){
-		changeControlIndexPatch=patchNr;
+	void GLWidget::setChangeControlIndexPatch(int i){
+		changeControlIndexPatch=i;
 	}
 
 	void GLWidget::setChangeControlIndexI(int i){
@@ -1289,8 +1293,11 @@ namespace cagd
 	}
 
 	void GLWidget::onUpChangeControl() {
-//		_patch[changeControlIndexPatch].SetData(changeControlIndexI,changeControlIndexJ,_data_points[changeControlIndexPatch](changeControlIndexI,changeControlIndexJ));
 		modifyZ(0.1,true);
+	}
+
+	void GLWidget::onDownChangeControl() {
+		modifyZ(-0.1,true);
 	}
 
 	void GLWidget::modifyZ(GLdouble z,bool first){
@@ -1305,6 +1312,8 @@ namespace cagd
 					changeControlIndexPatch=_patch[i].west;
 					changeControlIndexI=3;
 					modifyZ(z,false);
+					changeControlIndexI=0;
+					changeControlIndexPatch=i;
 				}
 			}
 			if(changeControlIndexJ==0) {
@@ -1312,6 +1321,9 @@ namespace cagd
 					changeControlIndexPatch=_patch[i].south;
 					changeControlIndexJ=3;
 					modifyZ(z,false);
+					join(i,changeControlIndexPatch,1);
+					changeControlIndexJ=0;
+					changeControlIndexPatch=i;
 				}
 			}
 			if(changeControlIndexI==3) {
@@ -1319,6 +1331,9 @@ namespace cagd
 					changeControlIndexI=0;
 					changeControlIndexPatch=_patch[i].east;
 					modifyZ(z,false);
+//					join(i,changeControlIndexPatch,2);
+					changeControlIndexI=3;
+					changeControlIndexPatch=i;
 				}
 			}
 			if(changeControlIndexJ==3) {
@@ -1326,9 +1341,55 @@ namespace cagd
 					changeControlIndexPatch=_patch[i].north;
 					changeControlIndexJ=0;
 					modifyZ(z,false);
+//					join(i,changeControlIndexPatch,0);
+					changeControlIndexJ=3;
+					changeControlIndexPatch=i;
 				}
 			}
+			if(_patch[i].west!=-1) {
+				join(i,_patch[i].west,3);
+			}
+			if(_patch[i].north!=-1) {
+				join(i,_patch[i].north,0);
+			}
+			if(_patch[i].south!=-1) {
+				join(i,_patch[i].south,1);
+			}
+			if(_patch[i].east!=-1) {
+				join(i,_patch[i].east,2);
+			}
 		}
+		//		else {
+
+		//			if(changeControlIndexI==0) {
+		//				if(_patch[i].west!=-1) {
+		//					changeControlIndexPatch=_patch[i].west;
+		//					join(i,changeControlIndexPatch,3);
+		//					changeControlIndexPatch=i;
+		//				}
+		//			}
+		//			if(changeControlIndexJ==0) {
+		//				if(_patch[i].south!=-1) {
+		//					changeControlIndexPatch=_patch[i].south;
+		//					join(i,changeControlIndexPatch,1);
+		//					changeControlIndexPatch=i;
+		//				}
+		//			}
+		//			if(changeControlIndexI==3) {
+		//				if(_patch[i].east!=-1) {
+		//					changeControlIndexPatch=_patch[i].east;
+		//					join(i,changeControlIndexPatch,2);
+		//					changeControlIndexPatch=i;
+		//				}
+		//			}
+		//			if(changeControlIndexJ==3) {
+		//				if(_patch[i].north!=-1) {
+		//					changeControlIndexPatch=_patch[i].north;
+		//					join(i,changeControlIndexPatch,0);
+		//					changeControlIndexPatch=i;
+		//				}
+		//			}
+		//		}
 		_patch[i].UpdateVertexBufferObjectsOfData();
 
 

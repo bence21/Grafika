@@ -454,7 +454,7 @@
      </rect>
     </property>
     <property name="minimum">
-     <number>1</number>
+     <number>0</number>
     </property>
     <property name="value">
      <number>1</number>
@@ -502,9 +502,9 @@
    <widget class="QWidget" name="gridLayoutWidget_2">
     <property name="geometry">
      <rect>
-      <x>150</x>
-      <y>20</y>
-      <width>295</width>
+      <x>130</x>
+      <y>0</y>
+      <width>121</width>
       <height>100</height>
      </rect>
     </property>
@@ -763,6 +763,19 @@
     </property>
     <property name="text">
      <string>Patch index</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="downPushButton">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>60</y>
+      <width>61</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Down</string>
     </property>
    </widget>
   </widget>
