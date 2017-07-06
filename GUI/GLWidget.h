@@ -76,6 +76,8 @@ namespace cagd
         GLint indexY;
 
 		vector<BicubicBezierPatch> _patch;
+		vector<RowMatrix<GenericCurve3*>*> _u_isoline;
+		vector<RowMatrix<GenericCurve3*>*> _v_isoline;
 		vector<Matrix<DCoordinate3>> _data_points;
         GLint _joinDirectionValue;
 
@@ -96,6 +98,8 @@ namespace cagd
 		int changeControlIndexPatch=0;
 		int changeControlIndexI=0;
 		int changeControlIndexJ=0;
+
+		bool showUV=false;
 
 	public:
 		// special and default constructor
@@ -173,5 +177,7 @@ namespace cagd
 
 		void onUpChangeControl();
 		void onDownChangeControl();
+
+		void setShowUV(bool value);
 	};
 }

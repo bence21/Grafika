@@ -389,7 +389,7 @@
     </rect>
    </property>
    <property name="title">
-    <string>Join</string>
+    <string>Merge</string>
    </property>
    <widget class="QComboBox" name="directionComboBox">
     <property name="geometry">
@@ -620,6 +620,22 @@
     </property>
     <property name="checked">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QCheckBox" name="showUVCheckBox">
+    <property name="geometry">
+     <rect>
+      <x>170</x>
+      <y>40</y>
+      <width>131</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>ShowUV</string>
+    </property>
+    <property name="checked">
+     <bool>false</bool>
     </property>
    </widget>
   </widget>

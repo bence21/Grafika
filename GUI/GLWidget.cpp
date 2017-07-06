@@ -469,12 +469,49 @@ namespace cagd
 			modelRender();
 		}
 		if(showPatch) {
+			if(showUV) {
+				glDisable(GL_LIGHTING);
+				glDisable(GL_NORMALIZE);
+				glDisable(GL_LIGHT0);
+				glColor3f(1.0f,0.0f,0.0f);
+				for(int k=0;k<_u_isoline.size();++k){
+					for(int i=0;i<_u_isoline[k]->GetColumnCount();++i)
+						(*_u_isoline[k])[i]->RenderDerivatives(0,GL_LINE_STRIP);
+				}
+				glColor3f(1.0f,1.0f,1.0f);
+				for(int k=0;k<_v_isoline.size();++k){
+					for(int i=0;i<_v_isoline[k]->GetColumnCount();++i) {
+						glColor3f(1.0f,1.0f,1.0f);
+						(*_v_isoline[k])[i]->RenderDerivatives(0,GL_LINE_STRIP);
+
+//						glPointSize(5.0);
+						glColor4f(0.0,0.5,0.0,0.9);
+//						GenericCurve3.RenderDerivatives()
+						(*_v_isoline[k])[i]->RenderDerivatives(1,GL_LINES);
+						(*_v_isoline[k])[i]->RenderDerivatives(1,GL_POINTS);
+//						glColor3f(0.1f,0.5f,0.9f);
+//						(*_v_isoline[k])[i]->RenderDerivatives(2,GL_LINES);
+//						(*_v_isoline[k])[i]->RenderDerivatives(2,GL_POINTS);
+//						glPointSize(1.0);
+					}
+	//				for(int i=0;i<_u_isoline[k]->GetColumnCount();++i) {
+	//					for(int i=0;i<1;++i) {
+	//					RowMatrix<GenericCurve3*> * tmp=_u_isoline[k];
+	//					GenericCurve3*tmp2;
+	//					tmp2=(GenericCurve3*)&tmp[i];
+	//					tmp2->RenderDerivatives(0,GL_LINE_STRIP);
+	//	//					_u_isoline[k][i]->RenderDerivatives(0,GL_LINE_STRIP);
+	//	//					_v_isoline[k][i].RenderDerivatives(0,GL_LINE_STRIP);
+	//				}
+				}
+			}
 			_materials[selectedMaterial].Apply();
 			glEnable(GL_LIGHTING);
 			glEnable(GL_NORMALIZE);
 			glEnable(GL_LIGHT0);
 			for(int k=0;k<patchNr;++k){
-
+//				BicubicBezierPatch.GenerateUIsoparametricLines()
+//				_u_isoline[k]->Render();
 				if(showControlNet){
 					if (!_patch[k].RenderData())
 					{
@@ -1021,6 +1058,18 @@ namespace cagd
 			secondToJoin=tmp2;
 			_joinDirectionValue=tmp3;
 		}
+		_u_isoline.resize(patchNr);
+		_v_isoline.resize(patchNr);
+//		BicubicBezierPatch.GenerateUIsoparametricLines()
+		_u_isoline[i]=_patch[i].GenerateUIsoparametricLines(30,1,30);
+		_v_isoline[i]=_patch[i].GenerateVIsoparametricLines(25,1,30);
+
+		for(int k=0;k<_u_isoline[i]->GetColumnCount();++k) {
+			(*_u_isoline[i])[k]->UpdateVertexBufferObjects();
+		}
+		for(int k=0;k<_v_isoline[i]->GetColumnCount();++k) {
+			(*_v_isoline[i])[k]->UpdateVertexBufferObjects(GL_STATIC_DRAW,0.1);
+		}
 	}
 
 	void GLWidget::setX(int x){
@@ -1437,7 +1486,13 @@ namespace cagd
 			for(GLuint column=0;column<4;++column){
 				_patch[i].SetData(row,column,_data_points[i](row,column));
 			}
+		if(first){
+			updateGL();
+		}
+	}
 
+	void GLWidget::setShowUV(bool value) {
+		showUV=value;
 		updateGL();
 	}
 }
